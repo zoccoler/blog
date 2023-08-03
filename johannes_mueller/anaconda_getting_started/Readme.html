@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Getting started with Anaconda and Python &#8212; BiA-PoL blog</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'johannes_mueller/anaconda_getting_started/Readme';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Automated package documentation with Sphinx" href="../entry_sphinx/Readme.html" />
+    <link rel="prev" title="Mini-Sabbatical Experience at Bia-PoL" href="../../marcelo_zoccoler/mini_sabbatical_rike/Readme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/biapol_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/biapol_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Blog Posts</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../qtdesigner_and_magicgui/Readme.html">Best of both worlds: Combining Qt Designer and magicgui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mara_lampert/getting_started_with_mambaforge_and_python/readme.html">Getting started with Mambaforge and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../till_korten/devbio-napari_cluster/readme.html">Using GPU-accelerated image processing on the TUD HPC cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../till_korten/devbio-napari_cluster_setup/readme.html">Setting up GPU-accelerated image processing on the TUD HPC cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../marcelo_zoccoler/omero_scripts/readme.html">Running Deep-Learning Scripts in the BiA-PoL Omero Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../marcelo_zoccoler/mini_sabbatical_rike/Readme.html">Mini-Sabbatical Experience at Bia-PoL</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Getting started with Anaconda and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../entry_sphinx/Readme.html">Automated package documentation with Sphinx</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../entry_user_inter/Readme.html">Custom user interfaces for Python (Part 1)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../entry_user_interf2/Readme.html">Custom user interfaces for Python (Part 2)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../marcelo_zoccoler/entry_user_interf3/Readme.html">Custom user interfaces for Python (Part 3)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../marcelo_zoccoler/entry_user_interf4/Readme.html">Custom user interfaces for Python (Part 4)</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../marcelo_zoccoler/jamovi/jamovi.html">Jamovi: statistical analysis made visual and easy (powered with R)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/ms_build_tools/readme.html">Installing Microsoft buildtools on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/principal_feature_analysis/readme.html">Principal Feature Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/03_background_subtraction/readme.html">Background Subtraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/02_intro_to_skimage/readme.html">Introduction to Image Analysis Basics in Python with Scikit Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/stardist_gpu/readme.html">Using StarDist in napari with GPU-support in Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/01_intro_to_python/readme.html">Introduction to Using Python for Image Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/cupy_cucim/readme.html">GPU-accelerated image processing using cupy and cucim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/browsing_idr/readme.html">Browsing the Open Microscopy Image Data Resource with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/clesperanto_google_colab/readme.html">GPU-accelerated image processing in the cloud using Google Colab and clEsperanto</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About the Blog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/why_we_blog/readme.html">Why we blog</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../people.html">BiA-PoL blog authors</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mara_lampert/readme.html">Mara Lampert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Readme.html">Johannes Müller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../marcelo_zoccoler/readme.html">Marcelo Zoccoler</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../ryan_savill/readme.html">Ryan Savill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robert_haase/readme.html">Robert Haase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../imprint.html">Imprint</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BiAPoL/blog" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BiAPoL/blog/issues/new?title=Issue%20on%20page%20%2Fjohannes_mueller/anaconda_getting_started/Readme.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/johannes_mueller/anaconda_getting_started/Readme.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Getting started with Anaconda and Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-conda">Using conda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-environment">Creating a new environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-packages">Installing packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-jupyter-lab">Working with Jupyter Lab:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="getting-started-with-anaconda-and-python">
+<h1>Getting started with Anaconda and Python<a class="headerlink" href="#getting-started-with-anaconda-and-python" title="Permalink to this heading">#</a></h1>
+<p><a class="reference internal" href="../Readme.html"><span class="doc std std-doc">Johannes Müller</span></a>, January 26th, 2022</p>
+<blockquote>
+<div><p><strong><em>NOTE:</em></strong>  The instructions in this blog post are outdated. <a class="reference external" href="https://biapol.github.io/blog/mara_lampert/getting_started_with_mambaforge_and_python/readme.html">Read the updated instructions</a>.</p>
+</div></blockquote>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="xref myst">Introduction</span></p></li>
+<li><p><span class="xref myst">Installation</span></p></li>
+<li><p><span class="xref myst">Using conda</span></p></li>
+<li><p><span class="xref myst">Creating new environments</span></p></li>
+<li><p><span class="xref myst">Installing new packages</span></p></li>
+<li><p><span class="xref myst">Working with Jupyter lab</span></p></li>
+</ul>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>This blog post will cover all necessary steps to download and setup Anaconda and Python on your machine and guide you through some steps to have it ready for some Bio-image analysis.</p>
+<p>Before we start, why do we need Anaconda in the first place to use Python? Robert Haase explains it in a bit more detail <a class="reference external" href="https://youtu.be/MOEPe9TGBK0?t=1806">here</a>. A few key features are:</p>
+<ul class="simple">
+<li><p>Python is a programming language simplifying collaboration and exchange between scientists from different disciplines. Everyone can write their own scripts and modules, and share them with everybody else. While this exchange enables collaborative data science projects on an entire new level, it is sometimes tricky to install the right versions of the right modules to make scripts run on each other’s computer. Anaconda helps you to manage the modules and ensures compatibility.</p></li>
+<li><p>Anaconda allows you to create so-called “conda” environments. It is recommended to create one conda environment for every project, just like you have one text document for one publication. This makes it much easier to maintain python code and modules that are relevant for the given project.</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">#</a></h2>
+<p>This tutorial is done on Windows, but should work equally on Mac OS. In order to download Anaconda, go to <a class="reference external" href="https://www.anaconda.com/products/individual">https://www.anaconda.com/products/individual</a> and click on <code class="docutils literal notranslate"><span class="pre">Download</span></code>:</p>
+<p><img alt="" src="../../_images/1_anaconda_download.jpg" /></p>
+<p>When Anaconda has finished downloading, follow these steps during the installation:</p>
+<ul class="simple">
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Next</span></code>:</p></li>
+</ul>
+<p><img alt="" src="../../_images/2_anaconda_install_1.jpg" /></p>
+<ul class="simple">
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">Agree</span></code>:</p></li>
+</ul>
+<p><img alt="" src="../../_images/2_anaconda_install_2.jpg" /></p>
+<ul class="simple">
+<li><p>Now you have to make the choice whether conda should be installed for <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">users</span></code> or not. We suggest to click <code class="docutils literal notranslate"><span class="pre">Just</span> <span class="pre">me</span></code>, as installing Anaconda for all users requires Administrator privileges and can cause trouble if other users on the same machine install  Anaconda, too.</p></li>
+</ul>
+<p><img alt="" src="../../_images/2_anaconda_install_3.jpg" /></p>
+<ul class="simple">
+<li><p>Install Anaconda into the default location:</p></li>
+</ul>
+<p><img alt="" src="../../_images/2_anaconda_install_4.jpg" /></p>
+<ul class="simple">
+<li><p>The installer now asks you to “<em>Add Anaconda3 to my PATH environment variable</em>. We suggest to do this and explain it below.</p></li>
+</ul>
+<p><img alt="" src="../../_images/2_anaconda_install_5.jpg" /></p>
+<ul class="simple">
+<li><p>Follow the next windows until you arrive here. No need to check these boxes - that’s what you are here for, anyways :) Click <code class="docutils literal notranslate"><span class="pre">Finish</span></code> to exit the setup.</p></li>
+</ul>
+<p><img alt="" src="../../_images/2_anaconda_install_6.jpg" /></p>
+<p>Great! You have finished the setup 👍</p>
+</section>
+<section id="using-conda">
+<h2>Using conda<a class="headerlink" href="#using-conda" title="Permalink to this heading">#</a></h2>
+<p>Although Anaconda provides a graphical user interface, it is rather common to use Anaconda from the command line. Hence, we will stick to using it for the rest of this tutorial. If you are not used to using the command line, Robert explains a few concepts <a class="reference external" href="https://youtu.be/MOEPe9TGBK0?t=1146">here</a>.</p>
+<p>First, we open a command line prompt. In Windows, you can simply hit the Windows-button, type <code class="docutils literal notranslate"><span class="pre">cmd</span></code> and hit <code class="docutils literal notranslate"><span class="pre">Enter</span></code> to spawn a command line prompt. In <a class="reference external" href="https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac">Mac OS</a>, click the Launchpad icon in the Dock, type <code class="docutils literal notranslate"><span class="pre">Terminal</span></code> in the search field, then click <code class="docutils literal notranslate"><span class="pre">Terminal</span></code>. In Linux, you typically find the Terminal application listed on the left-hand side application panel.</p>
+<p>You can now start Anaconda by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code>, which should add the prefix <code class="docutils literal notranslate"><span class="pre">(base)</span></code> at the start of the line:</p>
+<p><img alt="" src="../../_images/3_create_environments_3.jpg" /></p>
+<p><em>Note</em>: If, for any reason, you did not check the “Add to PATH” option above, you will need to open your command line differently. In Windows, hit the Windows button, type <code class="docutils literal notranslate"><span class="pre">anaconda</span></code> and select the application <code class="docutils literal notranslate"><span class="pre">Anaconda</span> <span class="pre">Prompt</span> <span class="pre">(anaconda3)</span></code>. Similarly, this application should exist on other platforms (Mac, Linux) in the list of installed applications.</p>
+<p><img alt="" src="../../_images/3_create_environments_1.jpg" /></p>
+<p>This will also open a command line which will directly activate the <code class="docutils literal notranslate"><span class="pre">base</span></code> environment and you can continue normally from here.</p>
+</section>
+<section id="creating-a-new-environment">
+<h2>Creating a new environment<a class="headerlink" href="#creating-a-new-environment" title="Permalink to this heading">#</a></h2>
+<p><strong>Important note</strong>: You are now in the so-called <code class="docutils literal notranslate"><span class="pre">base</span></code> environment. It is <strong>strongly recommended</strong> to never install any packages into the base environment! The reason for this is the following: It can happen that incompatibilities between packages occur. If that happens in an environment other than the <code class="docutils literal notranslate"><span class="pre">base</span></code> environment - no problem. You can simply delete the environment, recreate it and start over. If, however, this happens in your <code class="docutils literal notranslate"><span class="pre">base</span></code> environment you have to delete and reinstall Anaconda which takes a bit more time ;)</p>
+<p>With this out of the way, you can create a new environment with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">my_first_env</span> <span class="n">Python</span><span class="o">=</span><span class="mf">3.9</span>
+</pre></div>
+</div>
+<p>This will create a new environment with the name <code class="docutils literal notranslate"><span class="pre">my_first_env</span></code> and with Python version 3.9. Conda will then download a few basic packages that are shipped along with the environment and ask you to <code class="docutils literal notranslate"><span class="pre">Proceed</span> <span class="pre">([y]/n)</span></code> which you have to confirm with typing <code class="docutils literal notranslate"><span class="pre">y</span></code> and hitting <code class="docutils literal notranslate"><span class="pre">Enter</span></code>. Conda will now proceed to download and install some necessary packages.</p>
+<p>To activate this environment, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">my_first_env</span>
+</pre></div>
+</div>
+<p>This should lead to the prefix <code class="docutils literal notranslate"><span class="pre">my_first_env</span></code> to appear at the beginning of your command line:</p>
+<p><img alt="" src="../../_images/3_create_environments_4.jpg" /></p>
+<p>That’s it - you have created and activated your environment 👍</p>
+</section>
+<section id="installing-packages">
+<h2>Installing packages<a class="headerlink" href="#installing-packages" title="Permalink to this heading">#</a></h2>
+<p>In order to do some actual coding and image processing we still need a programm that allows us to actual write, edit and execute some code. For this we will be using <a class="reference external" href="https://jupyter.org/">Jupyter lab</a>, which you can convieniently install through conda. We will also need a few other packages for proper image processing, namely <a class="reference external" href="https://napari.org/">Napari</a> and <a class="reference external" href="https://pypi.org/project/pyopencl/">Pyopencl</a>. To install these type the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">napari</span> <span class="n">pyopencl</span> <span class="n">jupyterlab</span>
+</pre></div>
+</div>
+<p>Conda will again ask you for your confirmation (<code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">Enter</span></code>) to proceed with the installation. Other than that, you are now ready for some basic coding! 👍</p>
+<p><em>Note</em>: When installing packages from behind a proxy server (e.g., from within the networks of university hospitals or companies), you have to specify these proxy settings to conda. To do so, locate the file <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> on your computer. On Windows, it is typically located at <code class="docutils literal notranslate"><span class="pre">C:\Users\YourUserName\.condarc</span></code>. Open it with a text editor of your choice and add the following lines to the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proxy_servers</span><span class="p">:</span>
+    <span class="n">http</span><span class="p">:</span> <span class="n">NameOfProxy</span><span class="p">:</span><span class="mi">8080</span>
+    <span class="n">https</span><span class="p">:</span> <span class="n">NameOfProxy</span><span class="p">:</span><span class="mi">8080</span>
+</pre></div>
+</div>
+<p>Ask your local IT admin to get the name of your institution’s proxy server.</p>
+</section>
+<section id="working-with-jupyter-lab">
+<h2>Working with Jupyter Lab:<a class="headerlink" href="#working-with-jupyter-lab" title="Permalink to this heading">#</a></h2>
+<p>As programming environment, we will use <a class="reference external" href="https://jupyter.org/">Jupyer lab</a>, a convenient environment for python programming in the browser. If you were able to complete the above installation instructions, you can now launch Jupyter lab from your console by simply typing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">lab</span>
+</pre></div>
+</div>
+<p>Jupyter will then start in your browser. If you are wondering why this is opening in your browser - this is exactly how it is intented to be. Now we can start a new notebook by clicking on the highlighted icon:</p>
+<p><img alt="" src="../../_images/4_jupyter_lab.png" /></p>
+<p>The newly created notebook will look like this:</p>
+<p><img alt="" src="../../_images/4_jupyter_lab2.png" /></p>
+<p>A few notes at what can be done here.</p>
+<ul class="simple">
+<li><p>Jupyter notebooks are organized in so-called <em>cells</em>. Each cell can be populated either by Python code or Markdown text. Markdown is a lightweight text formatting language - the same one is actually used for this blog - see <a class="reference external" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this page</a> for an overview over availablw formatting You can use the cells to write a workflow in Python code and annotate it with formatted text of your own.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">+</span></code> icon in the top bar to add new cells</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">scissor-icon</span></code> in the top bar to delete the currently selected cell</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">run</span></code> (triangle) button to run the currently selected cell. You can also do this by hitting <code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Enter</span></code> on your keyboard</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">stop</span></code> (rectangle) icon to interrupt the execution of a currently executed notebook.</p></li>
+<li><p>Use the dropdown menu titled <code class="docutils literal notranslate"><span class="pre">Code</span></code> to change a cell’s function from Python script to markdown or vice versa.</p></li>
+</ul>
+<p>Finally, test your notebook by typing the obligatory</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="../../_images/4_jupyter_lab3.png" /></p>
+<p>Happy coding!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./johannes_mueller/anaconda_getting_started"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../marcelo_zoccoler/mini_sabbatical_rike/Readme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mini-Sabbatical Experience at Bia-PoL</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../entry_sphinx/Readme.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Automated package documentation with Sphinx</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-conda">Using conda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-environment">Creating a new environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-packages">Installing packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-jupyter-lab">Working with Jupyter Lab:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marcelo Zoccoler, Johannes Müller, Till Korten, Ryan Savill, Mara Lampert, Robert Haase, DFG Cluster of Excellence "Physics of Life", TU Dresden
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Running Deep-Learning Scripts in the BiA-PoL Omero Server &#8212; BiA-PoL blog</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'marcelo_zoccoler/omero_scripts/readme';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Mini-Sabbatical Experience at Bia-PoL" href="../mini_sabbatical_rike/Readme.html" />
+    <link rel="prev" title="Setting up GPU-accelerated image processing on the TUD HPC cluster" href="../../till_korten/devbio-napari_cluster_setup/readme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/biapol_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/biapol_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Blog Posts</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../johannes_mueller/qtdesigner_and_magicgui/Readme.html">Best of both worlds: Combining Qt Designer and magicgui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mara_lampert/getting_started_with_mambaforge_and_python/readme.html">Getting started with Mambaforge and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../till_korten/devbio-napari_cluster/readme.html">Using GPU-accelerated image processing on the TUD HPC cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../till_korten/devbio-napari_cluster_setup/readme.html">Setting up GPU-accelerated image processing on the TUD HPC cluster</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Running Deep-Learning Scripts in the BiA-PoL Omero Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mini_sabbatical_rike/Readme.html">Mini-Sabbatical Experience at Bia-PoL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../johannes_mueller/anaconda_getting_started/Readme.html">Getting started with Anaconda and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../johannes_mueller/entry_sphinx/Readme.html">Automated package documentation with Sphinx</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../johannes_mueller/entry_user_inter/Readme.html">Custom user interfaces for Python (Part 1)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../johannes_mueller/entry_user_interf2/Readme.html">Custom user interfaces for Python (Part 2)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../entry_user_interf3/Readme.html">Custom user interfaces for Python (Part 3)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../entry_user_interf4/Readme.html">Custom user interfaces for Python (Part 4)</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../jamovi/jamovi.html">Jamovi: statistical analysis made visual and easy (powered with R)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/ms_build_tools/readme.html">Installing Microsoft buildtools on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/principal_feature_analysis/readme.html">Principal Feature Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/03_background_subtraction/readme.html">Background Subtraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/02_intro_to_skimage/readme.html">Introduction to Image Analysis Basics in Python with Scikit Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/stardist_gpu/readme.html">Using StarDist in napari with GPU-support in Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ryan_savill/01_intro_to_python/readme.html">Introduction to Using Python for Image Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/cupy_cucim/readme.html">GPU-accelerated image processing using cupy and cucim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/browsing_idr/readme.html">Browsing the Open Microscopy Image Data Resource with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/clesperanto_google_colab/readme.html">GPU-accelerated image processing in the cloud using Google Colab and clEsperanto</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About the Blog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../robert_haase/why_we_blog/readme.html">Why we blog</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../people.html">BiA-PoL blog authors</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mara_lampert/readme.html">Mara Lampert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../johannes_mueller/Readme.html">Johannes Müller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../readme.html">Marcelo Zoccoler</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../ryan_savill/readme.html">Ryan Savill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robert_haase/readme.html">Robert Haase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../imprint.html">Imprint</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BiAPoL/blog" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BiAPoL/blog/issues/new?title=Issue%20on%20page%20%2Fmarcelo_zoccoler/omero_scripts/readme.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/marcelo_zoccoler/omero_scripts/readme.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Running Deep-Learning Scripts in the BiA-PoL Omero Server</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#omero-server">Omero Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-access-to-the-bia-pol-omero-server">Getting access to the BiA-PoL Omero Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-to-the-omero-server">Importing data to the Omero Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-omero-scripts">Running Omero Scripts</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="running-deep-learning-scripts-in-the-bia-pol-omero-server">
+<h1>Running Deep-Learning Scripts in the BiA-PoL Omero Server<a class="headerlink" href="#running-deep-learning-scripts-in-the-bia-pol-omero-server" title="Permalink to this heading">#</a></h1>
+<p><a class="reference internal" href="../readme.html"><span class="doc std std-doc">Marcelo Zoccoler</span></a>, May 2nd 2022</p>
+<section id="omero-server">
+<h2>Omero Server<a class="headerlink" href="#omero-server" title="Permalink to this heading">#</a></h2>
+<p>OMERO is client-server software for managing, visualizing and analyzing microscopy images and associated metadata. Once configured, it can be accessed from a few different interfaces, which are:</p>
+<ul class="simple">
+<li><p>A command line;</p></li>
+<li><p>A web browser;</p></li>
+<li><p>A Desktop application.</p></li>
+</ul>
+<p>Viewing images and running scripts can be done from any of these interfaces, but importing images to the server can only be done via command line or the desktop application. Thus, in this tutorial, we show</p>
+<ol class="arabic simple">
+<li><p>how to load data using the desktop application, called Omero Insight;</p></li>
+<li><p>how to run a script for deep-learning (Stardist 2D) through the browser.</p></li>
+</ol>
+</section>
+<section id="getting-access-to-the-bia-pol-omero-server">
+<h2>Getting access to the BiA-PoL Omero Server<a class="headerlink" href="#getting-access-to-the-bia-pol-omero-server" title="Permalink to this heading">#</a></h2>
+<p>The Bio-Image Analysis group from the Physics of Life Cluster of Excellence has an Omero server. If you have access to your own omero server, you may skip to the next section.</p>
+<p>Access to the BiA-PoL Omero server may be provided to local users through the following steps:</p>
+<ol class="arabic simple">
+<li><p>Contact BiA-PoL members to check if you are allowed to get access to the server by email.</p></li>
+<li><p>One of the BiA-PoL members will ask the IT department to create an account for you. You need a ZIH account for that.</p></li>
+<li><p>Configure a VPN access by following <a class="reference external" href="https://intranet.crt-dresden.de/it-department/external-access.html">these instructions</a>.</p></li>
+<li><p>Connect to the “Biotec Crtd Journal Access” VPN.</p></li>
+</ol>
+</section>
+<section id="importing-data-to-the-omero-server">
+<h2>Importing data to the Omero Server<a class="headerlink" href="#importing-data-to-the-omero-server" title="Permalink to this heading">#</a></h2>
+<p>As mentioned before, you can import data to the server either via command line or via the Desktop Client. Here, we will explain the second option (Omero Insight application).
+The Omero webpage has a good step-by-step tutorial of how to import images to the server using the Desktop client application <code class="docutils literal notranslate"><span class="pre">Omero.insight</span></code>. When asked (step 2 of the link below), provide your omero server address. For the BiA-PoL server, the address is https://omero-int.biotec.tu-dresden.de .</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://omero-guides.readthedocs.io/projects/upload/en/latest/import-desktop-client.html#setup">Import data using the Desktop Client</a></p></li>
+</ul>
+<p>After installing Omero Insight and loading some images, you can access the server from Omero Insight, from command line or from the browser. From this point forward, we will only be accessing it from the browser. The server address from the browser is slightly different: https://omero-web.biotec.tu-dresden.de . There, provide the same ZIH username and password to connect to the server. Remember to be connected to the VPN!</p>
+</section>
+<section id="running-omero-scripts">
+<h2>Running Omero Scripts<a class="headerlink" href="#running-omero-scripts" title="Permalink to this heading">#</a></h2>
+<p>After logging in, you should get to the following screen:</p>
+<p><img alt="" src="../../_images/omero_screen1.png" /></p>
+<p>Images in Omero are usually organized as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>User/Client
+└──Project
+|    └──Dataset
+|        └──Images
+└──Orphaned Images
+</pre></div>
+</div>
+<p>The Orphaned Images is the place where images are stored if they have no Project associated to them. You can browse through this file structure by clicking on the <code class="docutils literal notranslate"><span class="pre">+</span></code> buttons to open these directories. Once you reach the Dataset level, you can see image thumbnails in the main panel. If you click on them, you can get the corresponding information on the right side. One of the most important properties is the Project/Dataset/Image ID (magenta arrow in the figure below), which you will usually need to provide to scripts.</p>
+<p><img alt="" src="../../_images/omero_screen2.png" /></p>
+<p>Omero scripts can be run by clicking on the small button with two gears on top of the screen (magenta square). A pop-up menu should open where you can select the origin of your scripts (<code class="docutils literal notranslate"><span class="pre">omero</span></code> or <code class="docutils literal notranslate"><span class="pre">CMCB</span></code>).</p>
+<p><img alt="" src="../../_images/omero_screen3.png" /></p>
+<p>In <code class="docutils literal notranslate"><span class="pre">omero</span></code>, you can run the standard omero scripts. If you are logged to BiA-PoL omero server, you also have access to run one of the plugins we are developing in <code class="docutils literal notranslate"><span class="pre">CMCB</span></code>. Most of them are work in progress, that is why you may find names starting with ‘testing’. In this tutorial, we will use “apply_stardist2D”. Clicking on it open a new small window:</p>
+<a class="reference internal image-reference" href="../../_images/omero_screen4.png"><img alt="../../_images/omero_screen4.png" src="../../_images/omero_screen4.png" style="width: 300px;" /></a>
+<p>There you should provide 3 parameters: the “Data Type” (Dataset or Image), the corresponding ID and one of the pretrained Stardist2D models. Then, click on the “Run Script” button. The Activities window (magenta square below) should pop-up on the top, indicating the status of execution. After the script finish running, it should look like this:</p>
+<a class="reference internal image-reference" href="../../_images/omero_screen5.png"><img alt="../../_images/omero_screen5.png" src="../../_images/omero_screen5.png" style="width: 300px;" /></a>
+<p>You can download the “Info” (green arrow above) and “Error” (cyan arrow above) as text files. “Error” may contain errors or, in this case, just some warnings that can be ignored. “Info” contains information returned from print statements within the script.</p>
+<p>The resulting labeled image may not be visible after that. If that is the case, refresh the files by clicking on the refresh button:</p>
+<a class="reference internal image-reference" href="../../_images/refresh.png"><img alt="../../_images/refresh.png" src="../../_images/refresh.png" style="width: 300px;" /></a>
+<p><img alt="" src="../../_images/omero_screen6.png" /></p>
+<p>The output image should now appear in the same place as the input image/dataset. It gets the name ‘label_2D’ + the chosen model + the input image name. It also gets some tags and key/pair values assigned to it to indicate how it was produced (right side panel).</p>
+<p>That’s it! You ran a server-side custom script and got its outputs.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./marcelo_zoccoler/omero_scripts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../till_korten/devbio-napari_cluster_setup/readme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Setting up GPU-accelerated image processing on the TUD HPC cluster</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../mini_sabbatical_rike/Readme.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mini-Sabbatical Experience at Bia-PoL</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#omero-server">Omero Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-access-to-the-bia-pol-omero-server">Getting access to the BiA-PoL Omero Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-to-the-omero-server">Importing data to the Omero Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-omero-scripts">Running Omero Scripts</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marcelo Zoccoler, Johannes Müller, Till Korten, Ryan Savill, Mara Lampert, Robert Haase, DFG Cluster of Excellence "Physics of Life", TU Dresden
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
